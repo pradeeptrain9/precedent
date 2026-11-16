@@ -7,6 +7,8 @@ Flags Jira work that revisits an earlier team decision. A fixed-rule engine (`sr
 - **Trigger**: on issue create, comments only when a CONFLICT is found
 - **Teamwork Graph**: Rovo actions look up each matched decision page's owner (curated `confluencePageOwners`, falling back to `confluencePageCreator`) so the answer says who to ask. Runs as the user, so it only shows owners that user can see. Not available in the trigger (`requestTeamworkGraph` is user-only). Scopes: `read:graph:page:confluence`, `read:graph:user:atlassian`.
 
+**Judges: install link and a 5-minute test script are in [JUDGING.md](JUDGING.md).**
+
 ## Setup after install
 
 1. Install on Jira **and** Confluence (same site).
