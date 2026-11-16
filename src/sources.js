@@ -23,6 +23,7 @@ export async function confluenceDecisions(as = 'user', limit = 50) {
   return {
     items: (json.results || []).map((r) => ({
       source: 'confluence',
+      pageId: r.content?.id,
       title: r.content?.title || r.title,
       excerpt: (r.excerpt || '').replace(/@@@(end)?hl@@@/g, ''),
       url: `${json._links?.base || ''}${r.url || r.content?._links?.webui || ''}`,

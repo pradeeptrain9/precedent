@@ -27,3 +27,9 @@ test('fails closed: empty work or no match says none found', () => {
   assert.deepEqual(findPrecedents({ summary: '' }, decisions), []);
   assert.match(report('X-1', [], ['Note: partial']), /^No prior decisions found for X-1\.\nNote: partial$/);
 });
+
+test('report shows decision owner when Teamwork Graph supplied one', () => {
+  const r = findPrecedents({ summary: 'Migrate orders service to MongoDB' }, decisions);
+  r[0].owner = 'Ada Lovelace';
+  assert.match(report('X-2', r), /owner: Ada Lovelace\) \/adr-12/);
+});

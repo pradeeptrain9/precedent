@@ -57,7 +57,8 @@ export function report(workKey, results, notes = []) {
     return [`No prior decisions found for ${workKey}.`, ...notes].join('\n');
   }
   const lines = results.map(
-    (r) => `- [${r.verdict}] ${r.title} (${r.source}, score ${r.score}, matched: ${r.matched.join(', ')}) ${r.url}`
+    (r) =>
+      `- [${r.verdict}] ${r.title} (${r.source}, score ${r.score}, matched: ${r.matched.join(', ')}${r.owner ? `, owner: ${r.owner}` : ''}) ${r.url}`
   );
   const conflicts = results.filter((r) => r.verdict === 'CONFLICT').length;
   return [

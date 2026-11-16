@@ -1,6 +1,7 @@
 import api, { route } from '@forge/api';
 import { findPrecedents, report } from './engine.js';
 import { getWork, confluenceDecisions, rejectedIssues } from './sources.js';
+import { addOwners, cloudIdFrom } from './twg.js';
 
 async function run(issueKey, as) {
   const work = await getWork(issueKey, as);
@@ -10,11 +11,12 @@ async function run(issueKey, as) {
 }
 
 // Rovo action + MCP tool: find-precedent (GET). Falls back to the issue the user is viewing.
-export async function findPrecedent(payload) {
+export async function findPrecedent(payload, context) {
   const issueKey = payload.issueKey || payload.context?.jira?.issueKey;
   if (!issueKey) return 'Tell me which Jira issue to check, for example PROJ-123.';
   try {
     const { results, notes } = await run(issueKey, 'user');
+    notes.push(...(await addOwners(results, cloudIdFrom(payload, context))));
     return report(issueKey, results, notes);
   } catch (e) {
     return `Precedent check failed: ${e.message}`;
@@ -22,12 +24,13 @@ export async function findPrecedent(payload) {
 }
 
 // Rovo action + MCP tool: check-conflict (GET) on free text, before an issue exists.
-export async function checkConflict(payload) {
+export async function checkConflict(payload, context) {
   const text = String(payload.proposal || '').slice(0, 2000);
   if (!text.trim()) return 'Describe the proposal to check.';
   const conf = await confluenceDecisions('user');
   const results = findPrecedents({ summary: text }, conf.items);
-  return report('proposal', results, conf.notes);
+  const notes = [...conf.notes, ...(await addOwners(results, cloudIdFrom(payload, context)))];
+  return report('proposal', results, notes);
 }
 
 // Trigger: on issue create, comment only when a CONFLICT exists (no noise on RELATED).

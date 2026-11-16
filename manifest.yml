@@ -9,6 +9,7 @@ modules:
         Always call find-precedent (for an issue key) or check-conflict (for free text) first.
         Only report decisions the tool returned. Never invent decisions, owners, dates or links.
         Lead with any CONFLICT items: name the decision, link it, and quote what it matched on.
+        If an owner is listed, suggest talking to that person before reopening the decision.
         If the tool output contains a "Note:" line, say the answer may be incomplete.
         If nothing was found, say so plainly.
       conversationStarters:
@@ -70,6 +71,8 @@ permissions:
     - write:jira-work
     - search:confluence
     - read:confluence-content.summary
+    - read:graph:page:confluence
+    - read:graph:user:atlassian
 app:
   runtime:
     name: nodejs24.x
