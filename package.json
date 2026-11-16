@@ -1,0 +1,12 @@
+{
+  "name": "precedent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@forge/api": "8.5.0"
+  }
+}
