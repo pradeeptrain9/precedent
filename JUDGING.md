@@ -49,7 +49,18 @@ You can also check an idea before filing it:
 
 > Does this proposal contradict an earlier decision: "use MongoDB for orders"?
 
-**C. MCP (optional).** A site admin can expose the tools to outside AI clients under admin.atlassian.com → Apps → Sites → your site → Connected apps → Precedent → enable tools. Then add `https://mcp.atlassian.com/forge/7b13220c-82e5-4ca1-b2ec-af9a328c0f72` as a remote MCP server in an MCP client. The tools are `find-precedent` and `check-conflict`.
+**C. MCP server (optional, about 3 minutes).** Precedent's two tools, `find-precedent` and `check-conflict`, are also an MCP server that any MCP client can call.
+
+1. Turn on external access (site admin): **admin.atlassian.com → Apps → Sites → your site → Connected apps → precedent → View app details → Tools: "Expose tools to MCP-compatible apps" → Enable tools.**
+2. Connect a client to `https://mcp.atlassian.com/forge/7b13220c-82e5-4ca1-b2ec-af9a328c0f72` (Streamable HTTP, OAuth). With the official MCP Inspector:
+   ```bash
+   npx @modelcontextprotocol/inspector
+   ```
+   Choose **Streamable HTTP**, paste the URL, select **Connect**, then **Accept** on Atlassian's consent screen for your site. Or in Claude Code: `claude mcp add --transport http precedent <url>`, then `/mcp` to sign in.
+3. **Tools → List Tools → find-precedent**, with issueKey = your issue key. Expected:
+   > `PLAT-…: 1 possible conflict(s), 0 related decision(s). - [CONFLICT] ADR-12: PostgreSQL for orders service, MongoDB rejected (confluence, score 1, matched: mongodb, orders, postgresql, service, owner: <name>) <link>`
+
+   **check-conflict** with proposal `use MongoDB for orders` returns the same conflict. Both run as you and include the Teamwork Graph owner.
 
 ## Notes
 - No data is stored. See [PRIVACY.md](PRIVACY.md).
