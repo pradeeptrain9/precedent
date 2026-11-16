@@ -20,6 +20,7 @@ export async function confluenceDecisions(as = 'user', limit = 50) {
   );
   if (!res.ok) return { items: [], notes: [`Note: Confluence search failed (HTTP ${res.status}); results may be incomplete.`] };
   const json = await res.json();
+  console.log(`confluence ${as}: ${json.totalSize ?? json.size ?? 0} decision pages`);
   return {
     items: (json.results || []).map((r) => ({
       source: 'confluence',

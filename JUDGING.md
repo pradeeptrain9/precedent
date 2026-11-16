@@ -6,8 +6,8 @@ Precedent warns when new Jira work revisits a decision your team already made, a
 
 **[Install Precedent](https://developer.atlassian.com/console/install/7b13220c-82e5-4ca1-b2ec-af9a328c0f72?signature=AYABeOIP6aViSP%2FmPK13tXsJI3sAAAADAAdhd3Mta21zAEthcm46YXdzOmttczp1cy13ZXN0LTI6NzA5NTg3ODM1MjQzOmtleS83MDVlZDY3MC1mNTdjLTQxYjUtOWY5Yi1lM2YyZGNjMTQ2ZTcAuAECAQB4CxqLTo9l4lqXuFjNim1xJM%2Bp%2F3TVP9xHS2BrU5DRRucBxr0Qqi1wdsVrFbciEZDY6AAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDJeWzrI0tf7F6Z2BuAIBEIA7DZsXPJLUFAVA1Z07VaYPZA7BpNJkXFfm5hWzzh7vZvpual1M1B%2FfO8kwd6NDJYhM3hhXE0nDMsirZnUAB2F3cy1rbXMAS2Fybjphd3M6a21zOmV1LXdlc3QtMTo3MDk1ODc4MzUyNDM6a2V5LzQ2MzBjZTZiLTAwYzMtNGRlMi04NzdiLTYyN2UyMDYwZTVjYwC4AQICAHi9bVMAkme4qVQX1fQHo6ePw3H40A7cGfz7yrmSfBWMXgGmSMPANnmy5fcBQoTaRgOiAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMY%2FaBH247EAweJVNHAgEQgDtVm7%2BARDAEtcB0s7%2FiH%2BP%2FkImrplrSbuRb79f8Tkd4HTIxx10EnAhlgHVpC%2Bw0E4p7FtXjnzf7rJL1vgAHYXdzLWttcwBLYXJuOmF3czprbXM6dXMtZWFzdC0xOjcwOTU4NzgzNTI0MzprZXkvNmMxMjBiYTAtNGNkNS00OTg1LWI4MmUtNDBhMDQ5NTJjYzU3ALgBAgIAeDYASx0XCjkny4iLV6vz%2BKtEGSGT6kdt0QRpkn6D%2FlVEAUqj%2FlkAasEa6HjXuqDR8oQAAAB%2BMHwGCSqGSIb3DQEHBqBvMG0CAQAwaAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAwQf%2BPmhJubBCrj%2BaUCARCAO3WehBPsc%2BmKJrKDp6K%2B8uI2uc8Qa4F6MG4kdbX6JD%2B4CHSvmnRkJr68fdw7QR1TLvq7oF16R4FsvRziAgAAAAAMAAAQAAAAAAAAAAAAAAAAAOi6dGrp%2FRMJzJKtzYwDsQn%2F%2F%2F%2F%2FAAAAAQAAAAAAAAAAAAAAAQAAADJdBj%2Baex5O3%2BATQ8nIeGVhjFudRYREyS5xth%2FUUpW4OAdlmYpglOlJN94Vs8N7H8J9oF2J8yYwtJ9PM0ZaJ1Yk3us%3D&product=jira&product=confluence)**
 
-1. Open the link, choose your site, and install on **Jira**.
-2. Open the link again and connect it to **Confluence** on the same site. Precedent reads decision pages from Confluence, so it needs both.
+1. Open the link and select **Get app**.
+2. Choose your site, **tick Confluence** under "additional Atlassian apps", and select **Install**. Precedent reads decision pages from Confluence, so it needs both.
 
 Rovo chat needs a site with Rovo (any paid plan, or a Forge demo site from `forge site provision`). The automatic Jira comment works without Rovo.
 
@@ -16,7 +16,7 @@ Rovo chat needs a site with Rovo (any paid plan, or a Forge demo site from `forg
 In the Confluence space where you will put the decision page:
 **Space settings → Users → Add people and agents → `precedent` (App) → role Viewer → Add → Save.**
 
-This only matters for the automatic comment, which runs as the app. Allow about a minute to take effect.
+This only matters for the automatic comment, which runs as the app. Allow about two minutes for it to take effect. If the picker shows more than one `precedent` app (possible after a reinstall), add each one. The newest install uses its own account.
 
 ## 3. Create a decision (1 minute)
 
@@ -37,7 +37,7 @@ Any page labelled `decision`, or with "ADR" or "decision" in the title, counts.
 > Summary: **Migrate orders service to MongoDB**
 > Description: Move the orders service from PostgreSQL to MongoDB.
 
-Within a few seconds, Precedent comments with a **CONFLICT** that links ADR-12 and lists the words it matched on.
+Within a few seconds, Precedent comments with a **CONFLICT** that links ADR-12 and lists the words it matched on. Jira can skip events for the first minute or two after an install; if no comment appears, create the issue again.
 
 **B. Rovo agent + Teamwork Graph.** Open Rovo chat, choose the **Precedent** agent, and ask:
 
